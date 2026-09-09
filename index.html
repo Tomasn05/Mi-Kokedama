@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personaliza tu Kokedama</title>
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos Generales con la paleta Verde */
         :root {
-            --verde-principal: #2d5a27;
-            --verde-claro: #8fbc8f;
-            --fondo-suave: #f0f7f4;
-            --texto-oscuro: #1c3b18;
+            --verde-bosque: #2b4436;
+            --verde-suave: #4a6b57;
+            --crema-fondo: #f9f8f3;
+            --tierra: #8c6d58;
+            --texto: #222b25;
+            --blanco-cristal: rgba(255, 255, 255, 0.88);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--fondo-suave);
-            color: var(--texto-oscuro);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #1a2920;
+            /* Fondo con imagen de naturaleza y plantas */
+            background-image: linear-gradient(rgba(20, 35, 25, 0.75), rgba(20, 35, 25, 0.85)), 
+                              url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--texto);
             margin: 0;
             padding: 0;
             display: flex;
@@ -25,229 +42,264 @@
             min-height: 100vh;
         }
 
-        /* Encabezado con Nombre de Marca */
+        /* Encabezado */
         header {
-            background-color: var(--verde-principal);
-            color: white;
-            width: 100%;
+            padding: 30px 20px 10px 20px;
             text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #ffffff;
         }
 
         header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 3px;
             margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         header p {
-            margin: 5px 0 0 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            opacity: 0.85;
+            margin-top: 8px;
+            font-weight: 300;
         }
 
         .container {
             width: 90%;
-            max-width: 500px;
-            margin: 20px auto;
+            max-width: 450px;
+            margin: 15px auto 40px auto;
+        }
+
+        /* Card Principal Transparente / Glassmorphism */
+        .card-aesthetic {
+            background: var(--blanco-cristal);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
         }
 
-        /* Pantalla Inicial */
-        #pantalla-bienvenida {
-            padding: 40px 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* Pantalla Bienvenida */
+        .hero-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-aesthetic h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--verde-bosque);
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .card-aesthetic p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         .btn-empezar {
-            background-color: var(--verde-principal);
+            background-color: var(--verde-bosque);
             color: white;
             border: none;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            border-radius: 25px;
+            padding: 16px 40px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(43, 68, 54, 0.3);
         }
 
         .btn-empezar:hover {
-            background-color: #23471f;
-            transform: scale(1.05);
+            background-color: var(--verde-suave);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(43, 68, 54, 0.4);
         }
 
-        /* Configurador Visual */
+        /* Configurador */
         #configurador {
-            display: none; /* Se activa con JavaScript */
+            display: none;
+        }
+
+        .preview-card {
             background: white;
+            border-radius: 18px;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid #eaeaea;
         }
 
-        /* Previsualización Visual que se va armando */
-        .preview-box {
-            position: relative;
-            width: 250px;
-            height: 300px;
-            margin: 0 auto 20px auto;
-            border: 2px dashed var(--verde-claro);
-            border-radius: 12px;
-            background-color: #fafafa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        .preview-badge {
+            display: inline-block;
+            background: #eaf1ed;
+            color: var(--verde-bosque);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 4px;
         }
 
-        /* Elementos acumulativos en la previsualización */
-        .preview-base {
-            font-weight: bold;
-            color: var(--verde-principal);
-            margin-top: 10px;
-            padding: 8px 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
+        .paso-titulo {
+            font-family: 'Playfair Display', serif;
+            color: var(--verde-bosque);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        .preview-planta {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        /* Opciones de Selección */
         .opciones-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-top: 15px;
+            margin-bottom: 20px;
         }
 
         .btn-opcion {
-            background: var(--fondo-suave);
-            border: 2px solid var(--verde-claro);
-            color: var(--texto-oscuro);
-            padding: 12px 5px;
-            border-radius: 10px;
+            background: #f4f6f4;
+            border: 1.5px solid #e0e6e2;
+            color: var(--texto);
+            padding: 14px 8px;
+            border-radius: 14px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .btn-opcion:hover, .btn-opcion.seleccionado {
-            background-color: var(--verde-principal);
+        .btn-opcion:hover {
+            border-color: var(--verde-suave);
+            background: #ffffff;
+        }
+
+        .btn-opcion.activo {
+            background-color: var(--verde-bosque);
             color: white;
-            border-color: var(--verde-principal);
+            border-color: var(--verde-bosque);
+            box-shadow: 0 4px 12px rgba(43, 68, 54, 0.25);
         }
 
-        /* Botón final de WhatsApp */
         .btn-whatsapp {
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             width: 100%;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 15px;
             display: none;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
         }
 
-        .paso-titulo {
-            color: var(--verde-principal);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .btn-whatsapp:hover {
+            background-color: #20bd5a;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado -->
     <header>
-        <h1 id="marca">[TU MARCA AQUÍ]</h1>
-        <p>Arma tu Kokedama a medida</p>
+        <h1>KOKEDAMAS</h1>
+        <p>Arte botánico artesanal</p>
     </header>
 
     <div class="container">
 
-        <!-- 1. PANTALLA INICIAL -->
-        <div id="pantalla-bienvenida">
-            <h2>¡Crea tu propia Kokedama!</h2>
-            <p>Elige cada detalle y te la preparamos especialmente para ti.</p>
+        <!-- Pantalla Inicial con Foto Aesthetic -->
+        <div id="pantalla-bienvenida" class="card-aesthetic">
+            <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=800&auto=format&fit=crop" alt="Kokedama artesanal" class="hero-img">
+            <h2>Diseña tu Kokedama</h2>
+            <p>Elige el tamaño de tu base de musgo, selecciona tu planta favorita y armaremos una pieza única para ti.</p>
             <button class="btn-empezar" onclick="empezar()">Empecemos</button>
         </div>
 
-        <!-- 2. PANTALLA DEL CONFIGURADOR -->
-        <div id="configurador">
+        <!-- Configurador -->
+        <div id="configurador" class="card-aesthetic">
 
-            <!-- Vista previa visual donde se arma la kokedama -->
-            <div class="preview-box">
-                <div id="preview-planta" class="preview-planta">🌿 Selecciona la planta</div>
-                <div id="preview-base" class="preview-base">🔴 Selecciona el tamaño</div>
+            <!-- Resumen Visual de la Selección -->
+            <div class="preview-card">
+                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 8px;">Tu Selección</div>
+                <span id="preview-base" class="preview-badge">Base: Pendiente</span>
+                <span id="preview-planta" class="preview-badge" style="display:none;">Planta: Pendiente</span>
             </div>
 
-            <!-- Paso 1: Elección de Base -->
+            <!-- Paso 1: Base -->
             <div id="paso-1">
-                <div class="paso-titulo">Paso 1: Elige el tamaño de la base (bola)</div>
+                <div class="paso-titulo">1. Elige el tamaño de la base</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion" onclick="seleccionarBase('Chica', '🔴 Base Chica')">Chica</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', '🔴 Base Mediana')">Mediana</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Grande', '🔴 Base Grande')">Grande</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Chica', this)">Chica</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', this)">Mediana</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('China', this)">China</button>
                 </div>
             </div>
 
-            <!-- Paso 2: Elección de Planta (Aparece tras elegir base) -->
-            <div id="paso-2" style="display: none; margin-top: 20px;">
-                <div class="paso-titulo">Paso 2: Elige tu Planta</div>
+            <!-- Paso 2: Planta -->
+            <div id="paso-2" style="display: none;">
+                <div class="paso-titulo">2. Elige tu planta</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', '🌿 Helecho')">Helecho</button>
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', '🌿 Spatiphyllum')">Spatiphyllum</button>
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', '🌿 Ficus')">Ficus</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', this)">Helecho</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', this)">Spatiphyllum</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', this)">Ficus</button>
                 </div>
             </div>
 
-            <!-- Botón de Envío por WhatsApp -->
             <button id="btn-ws" class="btn-whatsapp" onclick="enviarWhatsApp()">
-                📲 Pedir por WhatsApp
+                💬 Pedir por WhatsApp
             </button>
         </div>
 
     </div>
 
     <script>
-        // Variables para guardar las selecciones del usuario
         let eleccionBase = "";
         let eleccionPlanta = "";
-
-        // Reemplaza esto con tu número de WhatsApp (con código de país, ej: 5491123456789)
-        const numeroTelefono = "1234567890"; 
+        const numeroTelefono = "1234567890"; // Reemplaza con tu número de WhatsApp con código de país
 
         function empezar() {
             document.getElementById('pantalla-bienvenida').style.display = 'none';
             document.getElementById('configurador').style.display = 'block';
         }
 
-        function seleccionarBase(tamano, textoPreview) {
+        function seleccionarBase(tamano, elemento) {
             eleccionBase = tamano;
-            // Actualiza el texto visual en pantalla
-            document.getElementById('preview-base').innerText = textoPreview;
+            document.getElementById('preview-base').innerText = 'Base: ' + tamano;
             
-            // Muestra el siguiente paso
+            // Marcar botón activo
+            let botones = document.querySelectorAll('#paso-1 .btn-opcion');
+            botones.forEach(b => b.classList.remove('activo'));
+            elemento.classList.add('activo');
+
+            // Mostrar Paso 2
             document.getElementById('paso-2').style.display = 'block';
+            document.getElementById('preview-planta').style.display = 'inline-block';
             verificarFinalizado();
         }
 
-        function seleccionarPlanta(planta, textoPreview) {
+        function seleccionarPlanta(planta, elemento) {
             eleccionPlanta = planta;
-            // Actualiza la planta en la previsualización
-            document.getElementById('preview-planta').innerText = textoPreview;
+            document.getElementById('preview-planta').innerText = 'Planta: ' + planta;
+            
+            // Marcar botón activo
+            let botones = document.querySelectorAll('#paso-2 .btn-opcion');
+            botones.forEach(b => b.classList.remove('activo'));
+            elemento.classList.add('activo');
+
             verificarFinalizado();
         }
 
@@ -258,7 +310,7 @@
         }
 
         function enviarWhatsApp() {
-            const mensaje = `Hola! Estuve armando mi Kokedama en la página web:%0A- *Tamaño de base:* ${eleccionBase}%0A- *Planta:* ${eleccionPlanta}%0A%0A¿Me podrías dar más detalles sobre el precio y entrega?`;
+            const mensaje = `¡Hola! Estuve personalizando mi Kokedama en la página web:%0A%0A🌿 *Tamaño de Base:* ${eleccionBase}%0A🌱 *Planta:* ${eleccionPlanta}%0A%0AMe gustaría consultar sobre el precio y coordinar la compra.`;
             const url = `https://wa.me/${numeroTelefono}?text=${mensaje}`;
             window.open(url, '_blank');
         }

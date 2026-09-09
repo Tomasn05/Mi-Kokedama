@@ -127,38 +127,40 @@
             display: none;
         }
 
-        /* Contenedor Visual de la Bola */
+        /* Contenedor Visual */
         .preview-card {
-            background: #f7f9f8;
+            background: #ffffff;
             border-radius: 18px;
-            padding: 20px;
+            padding: 15px;
             margin-top: 25px;
             margin-bottom: 20px;
             border: 1px solid #eaeaea;
-            height: 280px;
+            height: 310px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .preview-img {
             object-fit: contain;
             border-radius: 12px;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 100%;
         }
 
-        /* Ajustes de Escala según la Base elegida */
+        /* Tamaños Notablemente Diferentes */
         .size-chica {
-            height: 120px;
+            height: 140px;
         }
 
         .size-mediana {
-            height: 170px;
+            height: 200px;
         }
 
         .size-grande {
-            height: 230px;
+            height: 270px;
         }
 
         .preview-badge {
@@ -169,7 +171,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .paso-titulo {
@@ -249,7 +251,7 @@
 
             <!-- Previsualización Dinámica -->
             <div class="preview-card">
-                <img id="preview-img" src="https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=600&auto=format&fit=crop" class="preview-img size-chica" alt="Base Kokedama">
+                <img id="preview-img" src="bola-chica.jpg" class="preview-img size-chica" alt="Base Kokedama">
                 <div>
                     <span id="preview-base" class="preview-badge">Base: Chica</span>
                     <span id="preview-planta" class="preview-badge" style="display:none;">Planta: Pendiente</span>
@@ -260,9 +262,9 @@
             <div id="paso-1">
                 <div class="paso-titulo">1. Elige el tamaño de la base</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=600&auto=format&fit=crop', 'size-chica', this)">Chica</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=600&auto=format&fit=crop', 'size-mediana', this)">Mediana</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Grande', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=600&auto=format&fit=crop', 'size-grande', this)">Grande</button>
+                    <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'bola-chica.jpg', 'size-chica', this)">Chica</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'bola-mediana.jpg', 'size-mediana', this)">Mediana</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Grande', 'bola-grande.jpg', 'size-grande', this)">Grande</button>
                 </div>
             </div>
 
@@ -307,14 +309,14 @@
             }
         }
 
-        function seleccionarBase(tamano, urlImagen, claseTamano, elemento) {
+        function seleccionarBase(tamano, nombreImagen, claseTamano, elemento) {
             eleccionBase = tamano;
             pasoActual = 2;
             
             document.getElementById('preview-base').innerText = 'Base: ' + tamano;
             const imgElement = document.getElementById('preview-img');
             
-            imgElement.src = urlImagen;
+            imgElement.src = nombreImagen;
             imgElement.className = 'preview-img ' + claseTamano;
             
             let botones = document.querySelectorAll('#paso-1 .btn-opcion');

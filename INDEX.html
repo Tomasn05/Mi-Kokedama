@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personaliza tu Kokedama</title>
+    <style>
+        /* Estilos Generales con la paleta Verde */
+        :root {
+            --verde-principal: #2d5a27;
+            --verde-claro: #8fbc8f;
+            --fondo-suave: #f0f7f4;
+            --texto-oscuro: #1c3b18;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo-suave);
+            color: var(--texto-oscuro);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Encabezado con Nombre de Marca */
+        header {
+            background-color: var(--verde-principal);
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        /* Pantalla Inicial */
+        #pantalla-bienvenida {
+            padding: 40px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-empezar {
+            background-color: var(--verde-principal);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-empezar:hover {
+            background-color: #23471f;
+            transform: scale(1.05);
+        }
+
+        /* Configurador Visual */
+        #configurador {
+            display: none; /* Se activa con JavaScript */
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Previsualización Visual que se va armando */
+        .preview-box {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            margin: 0 auto 20px auto;
+            border: 2px dashed var(--verde-claro);
+            border-radius: 12px;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Elementos acumulativos en la previsualización */
+        .preview-base {
+            font-weight: bold;
+            color: var(--verde-principal);
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        .preview-planta {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Opciones de Selección */
+        .opciones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-opcion {
+            background: var(--fondo-suave);
+            border: 2px solid var(--verde-claro);
+            color: var(--texto-oscuro);
+            padding: 12px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-opcion:hover, .btn-opcion.seleccionado {
+            background-color: var(--verde-principal);
+            color: white;
+            border-color: var(--verde-principal);
+        }
+
+        /* Botón final de WhatsApp */
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .paso-titulo {
+            color: var(--verde-principal);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1 id="marca">[TU MARCA AQUÍ]</h1>
+        <p>Arma tu Kokedama a medida</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. PANTALLA INICIAL -->
+        <div id="pantalla-bienvenida">
+            <h2>¡Crea tu propia Kokedama!</h2>
+            <p>Elige cada detalle y te la preparamos especialmente para ti.</p>
+            <button class="btn-empezar" onclick="empezar()">Empecemos</button>
+        </div>
+
+        <!-- 2. PANTALLA DEL CONFIGURADOR -->
+        <div id="configurador">
+
+            <!-- Vista previa visual donde se arma la kokedama -->
+            <div class="preview-box">
+                <div id="preview-planta" class="preview-planta">🌿 Selecciona la planta</div>
+                <div id="preview-base" class="preview-base">🔴 Selecciona el tamaño</div>
+            </div>
+
+            <!-- Paso 1: Elección de Base -->
+            <div id="paso-1">
+                <div class="paso-titulo">Paso 1: Elige el tamaño de la base (bola)</div>
+                <div class="opciones-grid">
+                    <button class="btn-opcion" onclick="seleccionarBase('Chica', '🔴 Base Chica')">Chica</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', '🔴 Base Mediana')">Mediana</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Grande', '🔴 Base Grande')">Grande</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Elección de Planta (Aparece tras elegir base) -->
+            <div id="paso-2" style="display: none; margin-top: 20px;">
+                <div class="paso-titulo">Paso 2: Elige tu Planta</div>
+                <div class="opciones-grid">
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', '🌿 Helecho')">Helecho</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', '🌿 Spatiphyllum')">Spatiphyllum</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', '🌿 Ficus')">Ficus</button>
+                </div>
+            </div>
+
+            <!-- Botón de Envío por WhatsApp -->
+            <button id="btn-ws" class="btn-whatsapp" onclick="enviarWhatsApp()">
+                📲 Pedir por WhatsApp
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Variables para guardar las selecciones del usuario
+        let eleccionBase = "";
+        let eleccionPlanta = "";
+
+        // Reemplaza esto con tu número de WhatsApp (con código de país, ej: 5491123456789)
+        const numeroTelefono = "1234567890"; 
+
+        function empezar() {
+            document.getElementById('pantalla-bienvenida').style.display = 'none';
+            document.getElementById('configurador').style.display = 'block';
+        }
+
+        function seleccionarBase(tamano, textoPreview) {
+            eleccionBase = tamano;
+            // Actualiza el texto visual en pantalla
+            document.getElementById('preview-base').innerText = textoPreview;
+            
+            // Muestra el siguiente paso
+            document.getElementById('paso-2').style.display = 'block';
+            verificarFinalizado();
+        }
+
+        function seleccionarPlanta(planta, textoPreview) {
+            eleccionPlanta = planta;
+            // Actualiza la planta en la previsualización
+            document.getElementById('preview-planta').innerText = textoPreview;
+            verificarFinalizado();
+        }
+
+        function verificarFinalizado() {
+            if (eleccionBase !== "" && eleccionPlanta !== "") {
+                document.getElementById('btn-ws').style.display = 'block';
+            }
+        }
+
+        function enviarWhatsApp() {
+            const mensaje = `Hola! Estuve armando mi Kokedama en la página web:%0A- *Tamaño de base:* ${eleccionBase}%0A- *Planta:* ${eleccionPlanta}%0A%0A¿Me podrías dar más detalles sobre el precio y entrega?`;
+            const url = `https://wa.me/${numeroTelefono}?text=${mensaje}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

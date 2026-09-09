@@ -12,9 +12,8 @@
         :root {
             --verde-bosque: #2b4436;
             --verde-suave: #4a6b57;
-            --crema-fondo: #f9f8f3;
             --texto: #222b25;
-            --blanco-cristal: rgba(255, 255, 255, 0.92);
+            --blanco-cristal: rgba(255, 255, 255, 0.94);
         }
 
         * {
@@ -25,7 +24,7 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #1a2920;
-            background-image: linear-gradient(rgba(20, 35, 25, 0.75), rgba(20, 35, 25, 0.85)), 
+            background-image: linear-gradient(rgba(20, 35, 25, 0.8), rgba(20, 35, 25, 0.9)), 
                               url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -70,7 +69,6 @@
         .card-aesthetic {
             background: var(--blanco-cristal);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.25);
@@ -79,7 +77,6 @@
             position: relative;
         }
 
-        /* Botón Volver */
         .btn-volver {
             position: absolute;
             top: 20px;
@@ -92,9 +89,6 @@
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .btn-volver:hover {
@@ -107,7 +101,6 @@
             object-fit: cover;
             border-radius: 16px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .card-aesthetic h2 {
@@ -118,51 +111,56 @@
             margin-bottom: 10px;
         }
 
-        .card-aesthetic p {
-            color: #555;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
         .btn-empezar {
             background-color: var(--verde-bosque);
             color: white;
             border: none;
             padding: 15px 35px;
             font-size: 1rem;
-            letter-spacing: 1px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
             box-shadow: 0 6px 18px rgba(43, 68, 54, 0.3);
         }
 
-        .btn-empezar:hover {
-            background-color: var(--verde-suave);
-        }
-
         #configurador {
             display: none;
         }
 
-        /* Visor de Imagen Dinámica */
+        /* Contenedor Visual de la Bola de Kokedama */
         .preview-card {
-            background: white;
+            background: #f7f9f8;
             border-radius: 18px;
-            padding: 15px;
+            padding: 20px;
             margin-top: 25px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             border: 1px solid #eaeaea;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* La imagen cambia de tamaño según la selección */
         .preview-img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 12px;
-            margin-bottom: 12px;
+            transition: all 0.4s ease;
+            max-width: 100%;
+        }
+
+        /* Tamaños Dinámicos */
+        .size-chica {
+            height: 140px;
+        }
+
+        .size-mediana {
+            height: 190px;
+        }
+
+        .size-china {
+            height: 240px;
         }
 
         .preview-badge {
@@ -173,7 +171,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin: 2px;
+            margin-top: 12px;
         }
 
         .paso-titulo {
@@ -192,30 +190,18 @@
         }
 
         .btn-opcion {
-            background: #f4f6f4;
+            background: #ffffff;
             border: 1.5px solid #e0e6e2;
             color: var(--texto);
-            padding: 10px 5px;
+            padding: 14px 8px;
             border-radius: 14px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.85rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-opcion img {
-            width: 100%;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 8px;
         }
 
         .btn-opcion:hover {
             border-color: var(--verde-suave);
-            background: #ffffff;
         }
 
         .btn-opcion.activo {
@@ -254,7 +240,7 @@
         <div id="pantalla-bienvenida" class="card-aesthetic">
             <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=800&auto=format&fit=crop" alt="Kokedama artesanal" class="hero-img">
             <h2>Diseña tu Kokedama</h2>
-            <p>Selecciona tu base y tu planta para ir construyendo tu pieza única en tiempo real.</p>
+            <p>Elige el tamaño de tu base de musgo y arma tu pieza paso a paso.</p>
             <button class="btn-empezar" onclick="empezar()">Empecemos</button>
         </div>
 
@@ -263,31 +249,23 @@
             
             <button class="btn-volver" onclick="volverAtras()">← Volver</button>
 
-            <!-- Previsualización Dinámica con Foto -->
+            <!-- Previsualización Dinámica con Tamaño Proporcional -->
             <div class="preview-card">
-                <img id="preview-img" src="https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=600&auto=format&fit=crop" class="preview-img" alt="Vista previa Kokedama">
+                <!-- Imagen por defecto (puedes reemplazarla por bola-mediana.jpg) -->
+                <img id="preview-img" src="bola-mediana.jpg" class="preview-img size-mediana" alt="Base Kokedama">
                 <div>
-                    <span id="preview-base" class="preview-badge">Base: Pendiente</span>
+                    <span id="preview-base" class="preview-badge">Base: Chica</span>
                     <span id="preview-planta" class="preview-badge" style="display:none;">Planta: Pendiente</span>
                 </div>
             </div>
 
             <!-- Paso 1: Base -->
             <div id="paso-1">
-                <div class="paso-titulo">1. Elige el tamaño de la base</div>
+                <div class="paso-titulo">1. Elige el tamaño de la base (bola)</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion" onclick="seleccionarBase('Chica', 'https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=200&auto=format&fit=crop" alt="Chica">
-                        Chica
-                    </button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=200&auto=format&fit=crop" alt="Mediana">
-                        Mediana
-                    </button>
-                    <button class="btn-opcion" onclick="seleccionarBase('China', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=200&auto=format&fit=crop" alt="China">
-                        China
-                    </button>
+                    <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'bola-chica.jpg', 'size-chica', this)">Chica</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'bola-mediana.jpg', 'size-mediana', this)">Mediana</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('China', 'bola-china.jpg', 'size-china', this)">China</button>
                 </div>
             </div>
 
@@ -295,18 +273,9 @@
             <div id="paso-2" style="display: none;">
                 <div class="paso-titulo">2. Elige tu planta</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?q=80&w=200&auto=format&fit=crop" alt="Helecho">
-                        Helecho
-                    </button>
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', 'https://images.unsplash.com/photo-1593691509543-c55fb32e7355?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1593691509543-c55fb32e7355?q=80&w=200&auto=format&fit=crop" alt="Spatiphyllum">
-                        Spatiphyllum
-                    </button>
-                    <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=600&auto=format&fit=crop', this)">
-                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=200&auto=format&fit=crop" alt="Ficus">
-                        Ficus
-                    </button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', this)">Helecho</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', this)">Spatiphyllum</button>
+                    <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', this)">Ficus</button>
                 </div>
             </div>
 
@@ -318,7 +287,7 @@
     </div>
 
     <script>
-        let eleccionBase = "";
+        let eleccionBase = "Chica";
         let eleccionPlanta = "";
         let pasoActual = 0;
         const numeroTelefono = "1234567890"; // Reemplaza con tu número de WhatsApp
@@ -330,32 +299,27 @@
         }
 
         function volverAtras() {
-            if (pasoActual === 2 && eleccionPlanta === "") {
-                // Volver al paso 1
+            if (pasoActual === 2) {
                 pasoActual = 1;
                 document.getElementById('paso-2').style.display = 'none';
+                document.getElementById('btn-ws').style.display = 'none';
             } else {
-                // Volver a la pantalla inicial
                 pasoActual = 0;
-                eleccionBase = "";
-                eleccionPlanta = "";
                 document.getElementById('configurador').style.display = 'none';
                 document.getElementById('pantalla-bienvenida').style.display = 'block';
-                document.getElementById('preview-planta').style.display = 'none';
-                document.getElementById('btn-ws').style.display = 'none';
-                
-                // Limpiar botones activos
-                document.querySelectorAll('.btn-opcion').forEach(b => b.classList.remove('activo'));
             }
         }
 
-        function seleccionarBase(tamano, urlImagen, elemento) {
+        function seleccionarBase(tamano, nombreImagen, claseTamano, elemento) {
             eleccionBase = tamano;
             pasoActual = 2;
             
-            // Actualizar vista previa
+            // Actualizar texto e imagen con clase de tamaño dinámico
             document.getElementById('preview-base').innerText = 'Base: ' + tamano;
-            document.getElementById('preview-img').src = urlImagen;
+            const imgElement = document.getElementById('preview-img');
+            
+            imgElement.src = nombreImagen;
+            imgElement.className = 'preview-img ' + claseTamano; // Aplica la escala Chica, Mediana o China
             
             // Marcar botón activo
             let botones = document.querySelectorAll('#paso-1 .btn-opcion');
@@ -367,14 +331,11 @@
             document.getElementById('preview-planta').style.display = 'inline-block';
         }
 
-        function seleccionarPlanta(planta, urlImagen, elemento) {
+        function seleccionarPlanta(planta, elemento) {
             eleccionPlanta = planta;
             
-            // Actualizar vista previa
             document.getElementById('preview-planta').innerText = 'Planta: ' + planta;
-            document.getElementById('preview-img').src = urlImagen;
             
-            // Marcar botón activo
             let botones = document.querySelectorAll('#paso-2 .btn-opcion');
             botones.forEach(b => b.classList.remove('activo'));
             elemento.classList.add('activo');

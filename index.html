@@ -146,21 +146,24 @@
         .preview-img {
             object-fit: contain;
             border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-width: 100%;
         }
 
-        /* Tamaños Notablemente Diferentes */
+        /* Escalas ajustadas con Transform para no alejar la imagen */
         .size-chica {
-            height: 140px;
+            height: 180px;
+            transform: scale(0.85);
         }
 
         .size-mediana {
-            height: 200px;
+            height: 220px;
+            transform: scale(1);
         }
 
         .size-grande {
-            height: 270px;
+            height: 280px;
+            transform: scale(1.15);
         }
 
         .preview-badge {

@@ -6,14 +6,17 @@
     <title>Personaliza tu Kokedama</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --verde-bosque: #2b4436;
-            --verde-suave: #4a6b57;
-            --texto: #222b25;
-            --blanco-cristal: rgba(255, 255, 255, 0.94);
+            --gris-principal: #2d3032;
+            --gris-oscuro: #1c1e1f;
+            --marrón-cálido: #8c6d58;
+            --marrón-suave: #a88972;
+            --luz-calida: #f4ece1;
+            --texto-oscuro: #2b2b2b;
+            --blanco-cristal: rgba(255, 255, 255, 0.92);
         }
 
         * {
@@ -23,13 +26,14 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #1a2920;
-            background-image: linear-gradient(rgba(20, 35, 25, 0.8), rgba(20, 35, 25, 0.9)), 
-                              url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop');
+            background-color: var(--gris-oscuro);
+            background-image: radial-gradient(circle at 50% 20%, rgba(244, 236, 225, 0.08) 0%, rgba(0, 0, 0, 0.8) 80%),
+                              linear-gradient(rgba(28, 30, 31, 0.85), rgba(28, 30, 31, 0.95)),
+                              url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: var(--texto);
+            color: var(--texto-oscuro);
             margin: 0;
             padding: 0;
             display: flex;
@@ -39,40 +43,41 @@
         }
 
         header {
-            padding: 25px 20px 10px 20px;
+            padding: 30px 20px 15px 20px;
             text-align: center;
-            color: #ffffff;
+            color: var(--luz-calida);
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            letter-spacing: 3px;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 4px;
             margin: 0;
             text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(244, 236, 225, 0.2);
         }
 
         header p {
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            opacity: 0.85;
-            margin-top: 5px;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            color: var(--marrón-suave);
+            margin-top: 6px;
         }
 
         .container {
-            width: 90%;
-            max-width: 450px;
-            margin: 10px auto 30px auto;
+            width: 92%;
+            max-width: 480px;
+            margin: 10px auto 40px auto;
         }
 
         .card-aesthetic {
             background: var(--blanco-cristal);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            padding: 30px 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 30px rgba(244, 236, 225, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             text-align: center;
             position: relative;
         }
@@ -81,10 +86,10 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(45, 48, 50, 0.08);
             border: none;
-            color: var(--verde-bosque);
-            padding: 8px 14px;
+            color: var(--gris-principal);
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -92,35 +97,52 @@
         }
 
         .btn-volver:hover {
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(45, 48, 50, 0.15);
         }
 
+        /* Foto de inicio más grande */
         .hero-img {
             width: 100%;
-            height: 220px;
+            height: 320px;
             object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .card-aesthetic h2 {
             font-family: 'Playfair Display', serif;
-            color: var(--verde-bosque);
-            font-size: 1.5rem;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            color: var(--gris-principal);
+            font-size: 1.7rem;
+            margin-top: 5px;
+            margin-bottom: 12px;
         }
 
+        .card-aesthetic p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        /* Botón Empecemos más grande */
         .btn-empezar {
-            background-color: var(--verde-bosque);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            font-size: 1rem;
+            background-color: var(--gris-principal);
+            color: var(--luz-calida);
+            border: 1px solid var(--marrón-cálido);
+            padding: 18px 45px;
+            font-size: 1.15rem;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
-            box-shadow: 0 6px 18px rgba(43, 68, 54, 0.3);
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 24px rgba(45, 48, 50, 0.35);
+        }
+
+        .btn-empezar:hover {
+            background-color: var(--marrón-cálido);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(140, 109, 88, 0.4);
         }
 
         #configurador {
@@ -130,11 +152,12 @@
         /* Contenedor Visual uniforme */
         .preview-card {
             background: #ffffff;
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 15px;
             margin-top: 25px;
             margin-bottom: 20px;
-            border: 1px solid #eaeaea;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -144,27 +167,28 @@
 
         .preview-img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 14px;
             transition: opacity 0.3s ease;
         }
 
         .preview-badge {
             display: inline-block;
-            background: #eaf1ed;
-            color: var(--verde-bosque);
-            padding: 6px 12px;
+            background: var(--luz-calida);
+            color: var(--marrón-cálido);
+            border: 1px solid rgba(140, 109, 88, 0.2);
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .paso-titulo {
             font-family: 'Playfair Display', serif;
-            color: var(--verde-bosque);
-            font-size: 1.2rem;
+            color: var(--gris-principal);
+            font-size: 1.25rem;
             margin-bottom: 15px;
             text-align: left;
         }
@@ -173,13 +197,13 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .btn-opcion {
             background: #ffffff;
-            border: 1.5px solid #e0e6e2;
-            color: var(--texto);
+            border: 1.5px solid #e2e2e2;
+            color: var(--gris-principal);
             padding: 14px 8px;
             border-radius: 14px;
             cursor: pointer;
@@ -188,29 +212,35 @@
         }
 
         .btn-opcion:hover {
-            border-color: var(--verde-suave);
+            border-color: var(--marrón-suave);
+            background: #fcfbfa;
         }
 
         .btn-opcion.activo {
-            background-color: var(--verde-bosque);
-            color: white;
-            border-color: var(--verde-bosque);
-            box-shadow: 0 4px 12px rgba(43, 68, 54, 0.25);
+            background-color: var(--gris-principal);
+            color: var(--luz-calida);
+            border-color: var(--marrón-cálido);
+            box-shadow: 0 4px 14px rgba(45, 48, 50, 0.3);
         }
 
         .btn-whatsapp {
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 16px;
+            padding: 18px;
             width: 100%;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 15px;
             display: none;
-            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
         }
     </style>
 </head>

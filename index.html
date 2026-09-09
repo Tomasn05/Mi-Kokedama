@@ -350,13 +350,16 @@
             document.getElementById('configurador').style.display = 'block';
             document.getElementById('paso-1').style.display = 'block';
             document.getElementById('paso-2').style.display = 'none';
+            document.getElementById('preview-planta').style.display = 'none';
         }
 
         function irAlPaso2() {
             pasoActual = 2;
             document.getElementById('paso-1').style.display = 'none';
             document.getElementById('paso-2').style.display = 'block';
-            document.getElementById('preview-planta').style.display = 'inline-block';
+            if (eleccionPlanta) {
+                document.getElementById('preview-planta').style.display = 'inline-block';
+            }
         }
 
         function volverAtras() {
@@ -364,6 +367,7 @@
                 pasoActual = 1;
                 document.getElementById('paso-2').style.display = 'none';
                 document.getElementById('paso-1').style.display = 'block';
+                document.getElementById('preview-planta').style.display = 'none';
             } else {
                 pasoActual = 0;
                 document.getElementById('configurador').style.display = 'none';
@@ -387,6 +391,7 @@
             eleccionPlanta = planta;
             
             document.getElementById('preview-planta').innerText = 'Planta: ' + planta;
+            document.getElementById('preview-planta').style.display = 'inline-block';
             
             let botones = document.querySelectorAll('#paso-2 .btn-opcion');
             botones.forEach(b => b.classList.remove('activo'));

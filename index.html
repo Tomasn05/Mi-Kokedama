@@ -127,7 +127,7 @@
             display: none;
         }
 
-        /* Contenedor Visual */
+        /* Contenedor Visual uniforme */
         .preview-card {
             background: #ffffff;
             border-radius: 18px;
@@ -135,7 +135,6 @@
             margin-top: 25px;
             margin-bottom: 20px;
             border: 1px solid #eaeaea;
-            height: 310px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -144,26 +143,11 @@
         }
 
         .preview-img {
-            object-fit: contain;
-            border-radius: 12px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 100%;
-        }
-
-        /* Escalas ajustadas con Transform para no alejar la imagen */
-        .size-chica {
-            height: 180px;
-            transform: scale(0.85);
-        }
-
-        .size-mediana {
+            width: 100%;
             height: 220px;
-            transform: scale(1);
-        }
-
-        .size-grande {
-            height: 280px;
-            transform: scale(1.15);
+            object-fit: cover;
+            border-radius: 12px;
+            transition: opacity 0.3s ease;
         }
 
         .preview-badge {
@@ -254,7 +238,7 @@
 
             <!-- Previsualización Dinámica -->
             <div class="preview-card">
-                <img id="preview-img" src="bola-chica.jpg" class="preview-img size-chica" alt="Base Kokedama">
+                <img id="preview-img" src="bola-chica.jpg" class="preview-img" alt="Base Kokedama">
                 <div>
                     <span id="preview-base" class="preview-badge">Base: Chica</span>
                     <span id="preview-planta" class="preview-badge" style="display:none;">Planta: Pendiente</span>
@@ -265,9 +249,9 @@
             <div id="paso-1">
                 <div class="paso-titulo">1. Elige el tamaño de la base</div>
                 <div class="opciones-grid">
-                    <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'bola-chica.jpg', 'size-chica', this)">Chica</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'bola-mediana.jpg', 'size-mediana', this)">Mediana</button>
-                    <button class="btn-opcion" onclick="seleccionarBase('Grande', 'bola-grande.jpg', 'size-grande', this)">Grande</button>
+                    <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'bola-chica.jpg', this)">Chica</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'bola-mediana.jpg', this)">Mediana</button>
+                    <button class="btn-opcion" onclick="seleccionarBase('Grande', 'bola-grande.jpg', this)">Grande</button>
                 </div>
             </div>
 
@@ -312,7 +296,7 @@
             }
         }
 
-        function seleccionarBase(tamano, nombreImagen, claseTamano, elemento) {
+        function seleccionarBase(tamano, nombreImagen, elemento) {
             eleccionBase = tamano;
             pasoActual = 2;
             
@@ -320,7 +304,6 @@
             const imgElement = document.getElementById('preview-img');
             
             imgElement.src = nombreImagen;
-            imgElement.className = 'preview-img ' + claseTamano;
             
             let botones = document.querySelectorAll('#paso-1 .btn-opcion');
             botones.forEach(b => b.classList.remove('activo'));

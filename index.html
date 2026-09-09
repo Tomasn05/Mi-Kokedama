@@ -100,7 +100,7 @@
             background: rgba(45, 48, 50, 0.15);
         }
 
-        /* Foto de inicio más grande */
+        /* Foto de inicio */
         .hero-img {
             width: 100%;
             height: 320px;
@@ -124,7 +124,7 @@
             margin-bottom: 25px;
         }
 
-        /* Botón Empecemos más grande */
+        /* Botón Empecemos */
         .btn-empezar {
             background-color: var(--gris-principal);
             color: var(--luz-calida);
@@ -149,12 +149,23 @@
             display: none;
         }
 
+        /* Indicador de pasos */
+        .pasos-indicador {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--marrón-cálido);
+            font-weight: 600;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
         /* Contenedor Visual uniforme */
         .preview-card {
             background: #ffffff;
             border-radius: 20px;
             padding: 15px;
-            margin-top: 25px;
+            margin-top: 15px;
             margin-bottom: 20px;
             border: 1px solid #e8e8e8;
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
@@ -183,6 +194,7 @@
             font-size: 0.82rem;
             font-weight: 600;
             margin-top: 12px;
+            margin-right: 4px;
         }
 
         .paso-titulo {
@@ -223,6 +235,28 @@
             box-shadow: 0 4px 14px rgba(45, 48, 50, 0.3);
         }
 
+        /* Botón Siguiente */
+        .btn-siguiente {
+            background-color: var(--gris-principal);
+            color: var(--luz-calida);
+            border: 1px solid var(--marrón-cálido);
+            padding: 16px;
+            width: 100%;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(45, 48, 50, 0.25);
+        }
+
+        .btn-siguiente:hover {
+            background-color: var(--marrón-cálido);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(140, 109, 88, 0.35);
+        }
+
         .btn-whatsapp {
             background-color: #25D366;
             color: white;
@@ -233,8 +267,7 @@
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 15px;
-            display: none;
+            margin-top: 10px;
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
         }
 
@@ -277,27 +310,30 @@
 
             <!-- Paso 1: Base -->
             <div id="paso-1">
-                <div class="paso-titulo">1. Elige el tamaño de la base</div>
+                <div class="pasos-indicador">Paso 1 de 2</div>
+                <div class="paso-titulo">Elige el tamaño de la base</div>
                 <div class="opciones-grid">
                     <button class="btn-opcion activo" onclick="seleccionarBase('Chica', 'bola-chica.jpg', this)">Chica</button>
                     <button class="btn-opcion" onclick="seleccionarBase('Mediana', 'bola-mediana.jpg', this)">Mediana</button>
                     <button class="btn-opcion" onclick="seleccionarBase('Grande', 'bola-grande.jpg', this)">Grande</button>
                 </div>
+                <button class="btn-siguiente" onclick="irAlPaso2()">Siguiente →</button>
             </div>
 
             <!-- Paso 2: Planta -->
             <div id="paso-2" style="display: none;">
-                <div class="paso-titulo">2. Elige tu planta</div>
+                <div class="pasos-indicador">Paso 2 de 2</div>
+                <div class="paso-titulo">Elige tu planta</div>
                 <div class="opciones-grid">
                     <button class="btn-opcion" onclick="seleccionarPlanta('Helecho', this)">Helecho</button>
                     <button class="btn-opcion" onclick="seleccionarPlanta('Spatiphyllum', this)">Spatiphyllum</button>
                     <button class="btn-opcion" onclick="seleccionarPlanta('Ficus', this)">Ficus</button>
                 </div>
+                <button id="btn-ws" class="btn-whatsapp" onclick="enviarWhatsApp()" style="display: none;">
+                    💬 Pedir por WhatsApp
+                </button>
             </div>
 
-            <button id="btn-ws" class="btn-whatsapp" onclick="enviarWhatsApp()">
-                💬 Pedir por WhatsApp
-            </button>
         </div>
 
     </div>
@@ -312,13 +348,22 @@
             pasoActual = 1;
             document.getElementById('pantalla-bienvenida').style.display = 'none';
             document.getElementById('configurador').style.display = 'block';
+            document.getElementById('paso-1').style.display = 'block';
+            document.getElementById('paso-2').style.display = 'none';
+        }
+
+        function irAlPaso2() {
+            pasoActual = 2;
+            document.getElementById('paso-1').style.display = 'none';
+            document.getElementById('paso-2').style.display = 'block';
+            document.getElementById('preview-planta').style.display = 'inline-block';
         }
 
         function volverAtras() {
             if (pasoActual === 2) {
                 pasoActual = 1;
                 document.getElementById('paso-2').style.display = 'none';
-                document.getElementById('btn-ws').style.display = 'none';
+                document.getElementById('paso-1').style.display = 'block';
             } else {
                 pasoActual = 0;
                 document.getElementById('configurador').style.display = 'none';
@@ -328,19 +373,14 @@
 
         function seleccionarBase(tamano, nombreImagen, elemento) {
             eleccionBase = tamano;
-            pasoActual = 2;
             
             document.getElementById('preview-base').innerText = 'Base: ' + tamano;
             const imgElement = document.getElementById('preview-img');
-            
             imgElement.src = nombreImagen;
             
             let botones = document.querySelectorAll('#paso-1 .btn-opcion');
             botones.forEach(b => b.classList.remove('activo'));
             elemento.classList.add('activo');
-
-            document.getElementById('paso-2').style.display = 'block';
-            document.getElementById('preview-planta').style.display = 'inline-block';
         }
 
         function seleccionarPlanta(planta, elemento) {
